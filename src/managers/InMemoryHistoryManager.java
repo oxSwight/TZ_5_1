@@ -1,6 +1,7 @@
 package managers;
 
 import models.Task;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,10 +10,17 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void add(Task task) {
-        if (history.size() == 10) {
+        if (task == null) {
+            return;
+        }
+
+        history.remove(task);
+
+        history.add(task);
+
+        if (history.size() > 10) {
             history.removeFirst();
         }
-        history.add(task);
     }
 
     @Override
