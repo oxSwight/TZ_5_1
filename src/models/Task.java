@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Task {
     private int id;
-    private final String name;
-    private final String description;
+    private String name;
+    private String description;
     private final int duration;
     private TaskStatus status;
 
@@ -58,17 +58,22 @@ public class Task {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Task)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return id == task.id &&
-                duration == task.duration &&
-                Objects.equals(name, task.name) &&
-                Objects.equals(description, task.description) &&
-                status == task.status;
+        return id == task.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, duration, status);
+        return Objects.hash(id);
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -1,5 +1,5 @@
-import managers.HistoryManager;
-import managers.InMemoryHistoryManager;
+package managers;
+
 import models.Task;
 import models.TaskStatus;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +28,6 @@ class InMemoryHistoryManagerTest {
 
         assertNotNull(history, "История не должна быть пустой.");
         assertEquals(1, history.size(), "История должна содержать одну задачу.");
-        assertEquals(task, history.get(0), "Задача в истории должна совпадать с добавленной задачей.");
+        assertEquals(task, history.getFirst(), "Задача в истории должна совпадать с добавленной задачей.");
     }
 }

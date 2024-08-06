@@ -1,5 +1,5 @@
-import managers.InMemoryTaskManager;
-import managers.TaskManager;
+package managers;
+
 import models.Epic;
 import models.Subtask;
 import models.Task;
@@ -33,7 +33,7 @@ class InMemoryTaskManagerTest {
 
         assertNotNull(tasks, "Задачи не возвращаются.");
         assertEquals(1, tasks.size(), "Неверное количество задач.");
-        assertEquals(task, tasks.get(0), "Задачи не совпадают.");
+        assertEquals(task, tasks.getFirst(), "Задачи не совпадают.");
     }
 
     @Test
@@ -50,7 +50,7 @@ class InMemoryTaskManagerTest {
 
         assertNotNull(epics, "Эпики не возвращаются.");
         assertEquals(1, epics.size(), "Неверное количество эпиков.");
-        assertEquals(epic, epics.get(0), "Эпики не совпадают.");
+        assertEquals(epic, epics.getFirst(), "Эпики не совпадают.");
     }
 
     @Test
@@ -70,7 +70,7 @@ class InMemoryTaskManagerTest {
 
         assertNotNull(subtasks, "Подзадачи не возвращаются.");
         assertEquals(1, subtasks.size(), "Неверное количество подзадач.");
-        assertEquals(subtask, subtasks.get(0), "Подзадачи не совпадают.");
+        assertEquals(subtask, subtasks.getFirst(), "Подзадачи не совпадают.");
     }
 
     @Test
@@ -83,7 +83,7 @@ class InMemoryTaskManagerTest {
 
         assertNotNull(history, "История не должна быть пустой.");
         assertEquals(1, history.size(), "История должна содержать одну задачу.");
-        assertEquals(task, history.get(0), "Задача в истории должна совпадать с добавленной задачей.");
+        assertEquals(task, history.getFirst(), "Задача в истории должна совпадать с добавленной задачей.");
     }
 
     @Test
