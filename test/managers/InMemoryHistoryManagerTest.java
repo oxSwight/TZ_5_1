@@ -1,5 +1,6 @@
 package managers;
 
+import managers.InMemoryHistoryManager;
 import models.Task;
 import models.TaskStatus;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,27 +8,47 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
-class InMemoryHistoryManagerTest {
-    private HistoryManager historyManager;
-    private Task task;
+public class InMemoryHistoryManagerTest {
+
+    private InMemoryHistoryManager historyManager;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         historyManager = new InMemoryHistoryManager();
-        task = new Task("Test Task", "Test Description", 0, TaskStatus.NEW);
-        task.setId(1);
     }
 
     @Test
-    void add() {
-        historyManager.add(task);
-        List<Task> history = historyManager.getHistory();
+    public void testAddTaskToHistory() {
+        Task task1 = new Task("Task 1", "Description 1", 0, TaskStatus.NEW);
+        task1.setId(1);
+        historyManager.add(task1);
 
-        assertNotNull(history, "История не должна быть пустой.");
+        List<Task> history = historyManager.getHistory();
         assertEquals(1, history.size(), "История должна содержать одну задачу.");
-        assertEquals(task, history.getFirst(), "Задача в истории должна совпадать с добавленной задачей.");
+        assertEquals(task1, history.getFirst(), "Задача должна быть добавлена в историю.");
+    }
+
+    @Test
+    public void testNoDuplicatesInHistory() {
+        Task task1 = new Task("Task 1", "Description 1", 0, TaskStatus.NEW);
+        task1.setId(1);
+        historyManager.add(task1);
+        historyManager.add(task1);
+
+        List<Task> history = historyManager.getHistory();
+        assertEquals(1, history.size(), "В истории не должно быть дубликатов.");
+    }
+
+    @Test
+    public void testRemoveTaskFromHistory() {
+        Task task1 = new Task("Task 1", "Description 1", 0,TaskStatus.NEW);
+        task1.setId(1);
+        historyManager.add(task1);
+        historyManager.remove(1);
+
+        List<Task> history = historyManager.getHistory();
+        assertTrue(history.isEmpty(), "История должна быть пустой после удаления задачи.");
     }
 }

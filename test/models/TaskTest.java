@@ -17,27 +17,17 @@ class TaskTest {
         task2.setId(1);
 
         assertEquals(task1, task2, "Задачи с одинаковым id должны быть равны.");
+
     }
     @Test
     void getDefault_shouldReturnNotNull() {
         TaskManager taskManager = Managers.getDefaultTaskManager();
         assertNotNull(taskManager, "default manager should not be null");
     }
+
     @Test
     void getHistoryManager_shouldReturnNotNull() {
         HistoryManager historyManager = Managers.getDefaultHistory();
         assertNotNull(historyManager, "History manager should not be null");
-    }
-
-    @Test
-    void getHistoryManager_shouldReturnInstanceOfInMemoryHistoryManager() {
-        HistoryManager historyManager = Managers.getDefaultHistory();
-        assertTrue(true, "History manager should be an instance of InMemoryHistoryManager");
-    }
-
-    @Test
-    void getDefault_shouldReturnInstanceOfInMemoryTaskManager() {
-        TaskManager taskManager = Managers.getDefaultTaskManager();
-        assertTrue(true, "Default manager should be an instance of InMemoryTaskManager");
     }
 }
